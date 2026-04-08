@@ -1,49 +1,62 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const Login = ({ onLogin }) => {
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState('demo@collabflow.com');
+  const [name, setName] = useState('Demo User');
 
-  const handleLogin = () => {
-    if (!name.trim()) {
-      alert("Please enter your name");
-      return;
-    }
-    onLogin(name);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const initials = name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
+    onLogin({ 
+      name, 
+      email, 
+      role: 'Project Member', 
+      avatarInitials: initials 
+    });
   };
 
   return (
-    <div style={container}>
-      <h2>Login</h2>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        style={input}
-      />
-      <button onClick={handleLogin} style={button}>
-        Login
-      </button>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-icon">
+          <i className="fas fa-layer-group"></i>
+        </div>
+        <h2 className="login-title">CollabFlow</h2>
+        <p className="login-subtitle">Group Project Management</p>
+        
+        <form onSubmit={handleSubmit} className="login-form">
+          <input
+            type="text"
+            placeholder="Full name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="login-input"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="login-input"
+            required
+          />
+          <button type="submit" className="login-btn">
+            Enter Dashboard →
+          </button>
+        </form>
+        
+        <p className="login-demo-hint">
+          ✨ Demo: any name / email works
+        </p>
+      </div>
     </div>
   );
-};
-
-const container = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  marginTop: "120px",
-};
-
-const input = {
-  padding: "10px",
-  margin: "10px",
-  width: "220px",
-};
-
-const button = {
-  padding: "10px 20px",
-  cursor: "pointer",
 };
 
 export default Login;

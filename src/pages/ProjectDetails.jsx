@@ -1,38 +1,85 @@
-function ProjectDetails() {
+import React from 'react';
 
-  const project = {
-    title: "Student Project Management System",
-    description: "This project helps students manage tasks and collaborate.",
-    members: ["Hemashree", "Dareen", "Charishma", "Chethan"],
-    tasks: [
-      { name: "Login Page", status: "Completed" },
-      { name: "Dashboard UI", status: "In Progress" },
-      { name: "Chatroom", status: "Pending" }
-    ]
-  }
+const ProjectDetails = ({ project, onClose, onUpdateProject }) => {
+  if (!project) return null;
+
+  const addMember = () => {
+    const newMember = prompt('Enter member name:');
+    if (newMember && !project.members.includes(newMember)) {
+      onUpdateProject({
+        ...project,
+        members: [...project.members, newMember]
+      });
+    }
+  };
+
+  const removeMember = (memberToRemove) => {
+    if (confirm(`Remove ${memberToRemove} from project?`)) {
+      onUpdateProject({
+        ...project,
+        members: project.members.filter(m => m !== memberToRemove)
+      });
+    }
+  };
 
   return (
-    <div className="container mt-4">
-      <h2>{project.title}</h2>
-      <p>{project.description}</p>
-
-      <h4>Team Members</h4>
-      <ul>
-        {project.members.map((member, index) => (
-          <li key={index}>{member}</li>
-        ))}
-      </ul>
-
-      <h4>Tasks</h4>
-      <ul>
-        {project.tasks.map((task, index) => (
-          <li key={index}>
-            {task.name} - <b>{task.status}</b>
-          </li>
-        ))}
-      </ul>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="project-details-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <h2>{project.name}</h2>
+          <button onClick={onClose} className="close-modal">
+            <i className="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div className="modal-body">
+          <div className="details-section">
+            <h3><i className="fas fa-info-circle"></i> Description</h3>
+            <p>{project.description}</p>
+          </div>
+          
+          <div className="details-section">
+            <h3><i className="fas fa-users"></i> Team Members</h3>
+            <div className="members-list">
+              {project.members.map((member, i) => (
+                <div key={i} className="member-item">
+                  <span><i className="fas fa-user"></i> {member}</span>
+                  <button onClick={() => removeMember(member)} className="remove-member">
+                    <i className="fas fa-trash-alt"></i>
+                  </button>
+                </div>
+              ))}
+              <button onClick={addMember} className="add-member-btn">
+                <i className="fas fa-plus"></i> Add Member
+              </button>
+            </div>
+          </div>
+          
+          <div className="details-section">
+            <h3><i className="fas fa-tasks"></i> Task Summary</h3>
+            <div className="task-summary">
+              <div className="summary-item">
+                <span className="summary-label">Total Tasks:</span>
+                <span className="summary-value">{project.tasks.length}</span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Completed:</span>
+                <span className="summary-value done">
+                  {project.tasks.filter(t => t.status === 'done').length}
+                </span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">In Progress:</span>
+                <span className="summary-value progress">
+                  {project.tasks.filter(t => t.status === 'in-progress').length}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProjectDetails
+export default ProjectDetails;

@@ -1,53 +1,70 @@
-import React from "react";
+import React from 'react';
 
-const Dashboard = ({ user }) => {
-  const stats = {
-    projects: 3,
-    tasksCompleted: 12,
-    tasksPending: 5,
-  };
+const Dashboard = ({ projects, selectedProjectId, setSelectedProjectId }) => {
+  const currentProject = projects.find(p => p.id === selectedProjectId);
+  
+  const stats = currentProject ? {
+    total: currentProject.tasks.length,
+    todo: currentProject.tasks.filter(t => t.status === 'todo').length,
+    progress: currentProject.tasks.filter(t => t.status === 'in-progress').length,
+    done: currentProject.tasks.filter(t => t.status === 'done').length,
+  } : { total: 0, todo: 0, progress: 0, done: 0 };
 
   return (
-    <div style={container}>
-      <h1>Dashboard</h1>
-      <h3>Welcome, {user} 👋</h3>
-
-      <div style={cardContainer}>
-        <div style={card}>
-          <h4>Projects</h4>
-          <p>{stats.projects}</p>
-        </div>
-
-        <div style={card}>
-          <h4>Tasks Completed</h4>
-          <p>{stats.tasksCompleted}</p>
-        </div>
-
-        <div style={card}>
-          <h4>Pending Tasks</h4>
-          <p>{stats.tasksPending}</p>
-        </div>
+    <div className="dashboard-container">
+      <div className="dashboard-header">
+        <h1 className="page-title">Dashboard</h1>
+        <select 
+          value={selectedProjectId} 
+          onChange={(e) => setSelectedProjectId(e.target.value)}
+          className="project-selector"
+        >
+          {projects.map(p => (
+            <option key={p.id} value={p.id}>{p.name}</option>
+          ))}
+        </select>
       </div>
+
+      {currentProject ? (
+        <>
+          <div className="stats-grid">
+            <div className="stat-card">
+              <div className="stat-value">{stats.total}</div>
+              <div className="stat-label">Total Tasks</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-value todo">{stats.todo}</div>
+              <div className="stat-label">To Do</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-value progress">{stats.progress}</div>
+              <div className="stat-label">In Progress</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-value done">{stats.done}</div>
+              <div className="stat-label">Completed</div>
+            </div>
+          </div>
+
+          <div className="project-info-card">
+            <h3><i className="fas fa-users"></i> Team Members</h3>
+            <div className="team-members">
+              {currentProject.members.map((member, i) => (
+                <span key={i} className="member-tag">
+                  <i className="fas fa-user-check"></i> {member}
+                </span>
+              ))}
+            </div>
+            <p className="project-description">
+              <i className="fas fa-info-circle"></i> {currentProject.description}
+            </p>
+          </div>
+        </>
+      ) : (
+        <div className="empty-state">Select a project to view insights</div>
+      )}
     </div>
   );
-};
-
-const container = {
-  padding: "20px",
-};
-
-const cardContainer = {
-  display: "flex",
-  gap: "20px",
-  marginTop: "20px",
-};
-
-const card = {
-  border: "1px solid #ccc",
-  padding: "20px",
-  borderRadius: "10px",
-  width: "150px",
-  textAlign: "center",
 };
 
 export default Dashboard;
