@@ -7,17 +7,18 @@ import Chatroom from './pages/Chatroom';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import GroupManager from './components/GroupManager';
+import Contributions from './pages/Contributions';
 import './styles/app.css';
 import './styles/main.css';
 
-// ========== DEMO DATA ==========
+// ========== DEMO DATA WITH ENHANCED PROJECT DETAILS ==========
 const DEMO_GROUPS = [
   {
     id: 'group1',
     name: '🚀 AI Research Project',
     joinCode: 'AI2024',
     createdBy: 'Dr. Smith',
-    createdAt: '2024-01-15T10:00:00Z',
+    createdAt: '2026-01-15T10:00:00Z',
     members: [
       { id: 'user1', name: 'Dr. Smith', role: 'admin' },
       { id: 'user2', name: 'Alice Chen', role: 'member' },
@@ -30,7 +31,7 @@ const DEMO_GROUPS = [
     name: '💻 Web Dev Bootcamp',
     joinCode: 'WEB123',
     createdBy: 'Prof. Johnson',
-    createdAt: '2024-02-01T14:30:00Z',
+    createdAt: '2026-02-01T14:30:00Z',
     members: [
       { id: 'user5', name: 'Prof. Johnson', role: 'admin' },
       { id: 'user2', name: 'Alice Chen', role: 'member' },
@@ -42,7 +43,7 @@ const DEMO_GROUPS = [
     name: '🎨 Design Team Weekly',
     joinCode: 'DESIGN',
     createdBy: 'Sarah Parker',
-    createdAt: '2024-02-10T09:15:00Z',
+    createdAt: '2026-02-10T09:15:00Z',
     members: [
       { id: 'user7', name: 'Sarah Parker', role: 'admin' },
       { id: 'user8', name: 'Mike Ross', role: 'member' },
@@ -78,8 +79,24 @@ const DEMO_PROJECTS = {
     {
       id: 'proj1',
       name: 'Neural Network Implementation',
-      description: 'Build a CNN for image classification using PyTorch',
+      description: 'Build a CNN for image classification using PyTorch with high accuracy',
+      startDate: '2024-01-20',
+      endDate: '2024-03-15',
+      priority: 'high',
+      budget: 50000,
+      department: 'AI Research',
+      progress: 65,
       members: ['Dr. Smith', 'Alice Chen', 'Bob Wilson', 'Carol Davis'],
+      milestones: [
+        { name: 'Literature Review', dueDate: '2024-02-01', completed: true },
+        { name: 'Data Collection', dueDate: '2024-02-10', completed: true },
+        { name: 'Model Implementation', dueDate: '2024-02-25', completed: false },
+        { name: 'Testing & Evaluation', dueDate: '2024-03-10', completed: false }
+      ],
+      resources: [
+        { name: 'PyTorch Documentation', link: 'https://pytorch.org/docs' },
+        { name: 'Dataset Repository', link: 'https://kaggle.com/datasets' }
+      ],
       tasks: [
         { id: 't1', title: 'Literature Review on CNNs', status: 'done', assignee: 'Alice Chen', priority: 'high' },
         { id: 't2', title: 'Data Collection & Preprocessing', status: 'done', assignee: 'Bob Wilson', priority: 'high' },
@@ -94,7 +111,21 @@ const DEMO_PROJECTS = {
       id: 'proj2',
       name: 'Research Paper Submission',
       description: 'Write and submit paper to NeurIPS conference',
+      startDate: '2024-02-01',
+      endDate: '2024-03-30',
+      priority: 'high',
+      budget: 10000,
+      department: 'Research',
+      progress: 45,
       members: ['Dr. Smith', 'Alice Chen', 'Bob Wilson'],
+      milestones: [
+        { name: 'Abstract Submission', dueDate: '2024-02-15', completed: true },
+        { name: 'First Draft', dueDate: '2024-03-01', completed: false },
+        { name: 'Peer Review', dueDate: '2024-03-20', completed: false }
+      ],
+      resources: [
+        { name: 'NeurIPS Guidelines', link: 'https://neurips.cc/guidelines' }
+      ],
       tasks: [
         { id: 't8', title: 'Abstract Writing', status: 'done', assignee: 'Dr. Smith', priority: 'high' },
         { id: 't9', title: 'Methodology Section', status: 'done', assignee: 'Alice Chen', priority: 'high' },
@@ -109,7 +140,22 @@ const DEMO_PROJECTS = {
       id: 'proj3',
       name: 'E-Commerce Website',
       description: 'Full-stack e-commerce platform with React and Node.js',
+      startDate: '2024-02-10',
+      endDate: '2024-04-20',
+      priority: 'high',
+      budget: 75000,
+      department: 'Web Development',
+      progress: 35,
       members: ['Prof. Johnson', 'Alice Chen', 'David Lee'],
+      milestones: [
+        { name: 'UI Design Complete', dueDate: '2024-02-25', completed: true },
+        { name: 'Frontend Development', dueDate: '2024-03-15', completed: false },
+        { name: 'Backend Integration', dueDate: '2024-04-05', completed: false }
+      ],
+      resources: [
+        { name: 'React Documentation', link: 'https://react.dev' },
+        { name: 'Node.js Guide', link: 'https://nodejs.org' }
+      ],
       tasks: [
         { id: 't13', title: 'UI/UX Design', status: 'done', assignee: 'Alice Chen', priority: 'high' },
         { id: 't14', title: 'React Components', status: 'in-progress', assignee: 'David Lee', priority: 'high' },
@@ -124,8 +170,23 @@ const DEMO_PROJECTS = {
     {
       id: 'proj4',
       name: 'Mobile App UI Redesign',
-      description: 'Complete redesign of the mobile banking app',
+      description: 'Complete redesign of the mobile banking app with modern UI/UX',
+      startDate: '2024-02-15',
+      endDate: '2024-03-25',
+      priority: 'medium',
+      budget: 30000,
+      department: 'Design',
+      progress: 55,
       members: ['Sarah Parker', 'Mike Ross', 'Emma Watson', 'James Lee'],
+      milestones: [
+        { name: 'User Research', dueDate: '2024-02-20', completed: true },
+        { name: 'Wireframes', dueDate: '2024-03-01', completed: true },
+        { name: 'High-Fidelity Mockups', dueDate: '2024-03-15', completed: false }
+      ],
+      resources: [
+        { name: 'Figma Design System', link: 'https://figma.com' },
+        { name: 'UI Guidelines', link: 'https://material.io' }
+      ],
       tasks: [
         { id: 't19', title: 'User Research', status: 'done', assignee: 'Emma Watson', priority: 'high' },
         { id: 't20', title: 'Wireframing', status: 'done', assignee: 'Mike Ross', priority: 'high' },
@@ -151,6 +212,10 @@ function App() {
   const [user, setUser] = useState(DEMO_USER);
   const [activeTab, setActiveTab] = useState('groups');
   const [currentGroup, setCurrentGroup] = useState(null);
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('collabflow_theme');
+    return savedTheme || 'light';
+  });
   const [groups, setGroups] = useState(() => {
     const saved = localStorage.getItem('collabflow_groups');
     if (saved) {
@@ -178,6 +243,13 @@ function App() {
     return DEMO_PROJECTS;
   });
 
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('collabflow_theme', theme);
+  }, [theme]);
+
+  // Save to localStorage whenever data changes
   useEffect(() => {
     localStorage.setItem('collabflow_groups', JSON.stringify(groups));
   }, [groups]);
@@ -189,6 +261,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem('collabflow_all_projects', JSON.stringify(projects));
   }, [projects]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   const generateJoinCode = () => {
     return Math.random().toString(36).substring(2, 10).toUpperCase();
@@ -215,7 +291,15 @@ function App() {
         id: 'default',
         name: 'Getting Started',
         description: 'Your new project - add tasks to begin!',
+        startDate: new Date().toISOString().split('T')[0],
+        endDate: '',
+        priority: 'medium',
+        budget: 0,
+        department: 'General',
+        progress: 0,
         members: [userName],
+        milestones: [],
+        resources: [],
         tasks: [
           { id: 'default1', title: 'Welcome to your new group!', status: 'todo', assignee: userName, priority: 'medium' }
         ]
@@ -283,6 +367,14 @@ function App() {
     setProjects(prev => ({ ...prev, [groupId]: newProjects }));
   };
 
+  const updateSingleProject = (groupId, updatedProject) => {
+    const currentProjects = projects[groupId] || [];
+    const updatedProjects = currentProjects.map(p =>
+      p.id === updatedProject.id ? updatedProject : p
+    );
+    setProjects(prev => ({ ...prev, [groupId]: updatedProjects }));
+  };
+
   const handleLogin = (userData) => {
     setUser({ ...userData, id: Date.now().toString() });
     setIsLoggedIn(true);
@@ -322,6 +414,8 @@ function App() {
         user={user}
         currentGroup={currentGroup}
         onResetDemo={resetToDemoData}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
       
       <main className="main-content">
@@ -351,6 +445,15 @@ function App() {
             projects={projects[currentGroup.id] || []}
             group={currentGroup}
             onUpdateProjects={(newProjects) => updateGroupProjects(currentGroup.id, newProjects)}
+          />
+        )}
+        
+        {currentGroup && activeTab === 'contributions' && (
+          <Contributions
+            projects={projects[currentGroup.id] || []}
+            currentProject={projects[currentGroup.id]?.[0]}
+            group={currentGroup}
+            onUpdateProject={(updatedProject) => updateSingleProject(currentGroup.id, updatedProject)}
           />
         )}
         
