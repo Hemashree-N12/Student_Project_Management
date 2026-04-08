@@ -88,10 +88,10 @@ const DEMO_PROJECTS = {
       progress: 65,
       members: ['Dr. Smith', 'Alice Chen', 'Bob Wilson', 'Carol Davis'],
       milestones: [
-        { name: 'Literature Review', dueDate: '2024-02-01', completed: true },
-        { name: 'Data Collection', dueDate: '2024-02-10', completed: true },
-        { name: 'Model Implementation', dueDate: '2024-02-25', completed: false },
-        { name: 'Testing & Evaluation', dueDate: '2024-03-10', completed: false }
+        { name: 'Literature Review', dueDate: '2026-02-01', completed: true },
+        { name: 'Data Collection', dueDate: '2026-02-10', completed: true },
+        { name: 'Model Implementation', dueDate: '2026-02-25', completed: false },
+        { name: 'Testing & Evaluation', dueDate: '2026-03-10', completed: false }
       ],
       resources: [
         { name: 'PyTorch Documentation', link: 'https://pytorch.org/docs' },
@@ -119,9 +119,9 @@ const DEMO_PROJECTS = {
       progress: 45,
       members: ['Dr. Smith', 'Alice Chen', 'Bob Wilson'],
       milestones: [
-        { name: 'Abstract Submission', dueDate: '2024-02-15', completed: true },
-        { name: 'First Draft', dueDate: '2024-03-01', completed: false },
-        { name: 'Peer Review', dueDate: '2024-03-20', completed: false }
+        { name: 'Abstract Submission', dueDate: '2026-02-15', completed: true },
+        { name: 'First Draft', dueDate: '2026-03-01', completed: false },
+        { name: 'Peer Review', dueDate: '2026-03-20', completed: false }
       ],
       resources: [
         { name: 'NeurIPS Guidelines', link: 'https://neurips.cc/guidelines' }
@@ -148,9 +148,9 @@ const DEMO_PROJECTS = {
       progress: 35,
       members: ['Prof. Johnson', 'Alice Chen', 'David Lee'],
       milestones: [
-        { name: 'UI Design Complete', dueDate: '2024-02-25', completed: true },
-        { name: 'Frontend Development', dueDate: '2024-03-15', completed: false },
-        { name: 'Backend Integration', dueDate: '2024-04-05', completed: false }
+        { name: 'UI Design Complete', dueDate: '2026-02-25', completed: true },
+        { name: 'Frontend Development', dueDate: '2026-03-15', completed: false },
+        { name: 'Backend Integration', dueDate: '2026-04-05', completed: false }
       ],
       resources: [
         { name: 'React Documentation', link: 'https://react.dev' },
@@ -179,9 +179,9 @@ const DEMO_PROJECTS = {
       progress: 55,
       members: ['Sarah Parker', 'Mike Ross', 'Emma Watson', 'James Lee'],
       milestones: [
-        { name: 'User Research', dueDate: '2024-02-20', completed: true },
-        { name: 'Wireframes', dueDate: '2024-03-01', completed: true },
-        { name: 'High-Fidelity Mockups', dueDate: '2024-03-15', completed: false }
+        { name: 'User Research', dueDate: '2026-02-20', completed: true },
+        { name: 'Wireframes', dueDate: '2026-03-01', completed: true },
+        { name: 'High-Fidelity Mockups', dueDate: '2026-03-15', completed: false }
       ],
       resources: [
         { name: 'Figma Design System', link: 'https://figma.com' },
