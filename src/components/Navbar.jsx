@@ -1,13 +1,18 @@
 import React from 'react';
 
-const NavBar = ({ activeTab, setActiveTab, onLogout, user }) => {
+const NavBar = ({ activeTab, setActiveTab, onLogout, user, currentGroup, onResetDemo }) => {
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: 'fa-chalkboard-user' },
-    { id: 'kanban', label: 'Kanban', icon: 'fa-table-columns' },
-    { id: 'analytics', label: 'Analytics', icon: 'fa-chart-line' },
-    { id: 'chatroom', label: 'Chat', icon: 'fa-comments' },
-    { id: 'profile', label: 'Profile', icon: 'fa-user-circle' }
+    { id: 'groups', label: 'Groups', icon: 'fa-users', showAlways: true },
+    { id: 'dashboard', label: 'Dashboard', icon: 'fa-chalkboard-user', requireGroup: true },
+    { id: 'kanban', label: 'Kanban', icon: 'fa-table-columns', requireGroup: true },
+    { id: 'analytics', label: 'Analytics', icon: 'fa-chart-line', requireGroup: true },
+    { id: 'chatroom', label: 'Chat', icon: 'fa-comments', requireGroup: true },
+    { id: 'profile', label: 'Profile', icon: 'fa-user-circle', showAlways: true }
   ];
+
+  const visibleItems = navItems.filter(item => 
+    item.showAlways || (item.requireGroup && currentGroup)
+  );
 
   return (
     <nav className="navbar">
@@ -15,8 +20,16 @@ const NavBar = ({ activeTab, setActiveTab, onLogout, user }) => {
         <i className="fas fa-folder-tree"></i>
         <span>CollabFlow</span>
       </div>
+      
+      {currentGroup && (
+        <div className="current-group-badge">
+          <i className="fas fa-users"></i>
+          <span>{currentGroup.name}</span>
+        </div>
+      )}
+      
       <div className="navbar-nav">
-        {navItems.map(item => (
+        {visibleItems.map(item => (
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
@@ -27,7 +40,14 @@ const NavBar = ({ activeTab, setActiveTab, onLogout, user }) => {
           </button>
         ))}
       </div>
+      
       <div className="navbar-user">
+        {/* Demo Reset Button - Great for presentations! */}
+        <button onClick={onResetDemo} className="reset-demo-btn" title="Reset to Demo Data">
+          <i className="fas fa-sync-alt"></i>
+          <span className="reset-text">Reset Demo</span>
+        </button>
+        
         <div className="user-avatar">
           {user.avatarInitials}
         </div>
