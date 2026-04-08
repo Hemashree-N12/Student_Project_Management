@@ -1,27 +1,63 @@
-import { Link } from "react-router-dom"
+import React from 'react';
 
-function Navbar() {
+const NavBar = ({ activeTab, setActiveTab, onLogout, user, currentGroup, onResetDemo }) => {
+  const navItems = [
+    { id: 'groups', label: 'Groups', icon: 'fa-users', showAlways: true },
+    { id: 'dashboard', label: 'Dashboard', icon: 'fa-chalkboard-user', requireGroup: true },
+    { id: 'kanban', label: 'Kanban', icon: 'fa-table-columns', requireGroup: true },
+    { id: 'analytics', label: 'Analytics', icon: 'fa-chart-line', requireGroup: true },
+    { id: 'chatroom', label: 'Chat', icon: 'fa-comments', requireGroup: true },
+    { id: 'profile', label: 'Profile', icon: 'fa-user-circle', showAlways: true }
+  ];
+
+  const visibleItems = navItems.filter(item => 
+    item.showAlways || (item.requireGroup && currentGroup)
+  );
+
   return (
-    <nav style={{background: "#333", padding: "10px"}}>
+    <nav className="navbar">
+      <div className="navbar-brand">
+        <i className="fas fa-folder-tree"></i>
+        <span>CollabFlow</span>
+      </div>
       
-      <Link to="/project" style={{color: "white", marginRight: "10px"}}>
-        Project
-      </Link>
-
-      <Link to="/analytics" style={{color: "white", marginRight: "10px"}}>
-        Analytics
-      </Link>
-
-      <Link to="/chat" style={{color: "white", marginRight: "10px"}}>
-        Chat
-      </Link>
-
-      <Link to="/profile" style={{color: "white"}}>
-        Profile
-      </Link>
-
+      {currentGroup && (
+        <div className="current-group-badge">
+          <i className="fas fa-users"></i>
+          <span>{currentGroup.name}</span>
+        </div>
+      )}
+      
+      <div className="navbar-nav">
+        {visibleItems.map(item => (
+          <button
+            key={item.id}
+            onClick={() => setActiveTab(item.id)}
+            className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
+          >
+            <i className={`fas ${item.icon}`}></i>
+            <span>{item.label}</span>
+          </button>
+        ))}
+      </div>
+      
+      <div className="navbar-user">
+        {/* Demo Reset Button - Great for presentations! */}
+        <button onClick={onResetDemo} className="reset-demo-btn" title="Reset to Demo Data">
+          <i className="fas fa-sync-alt"></i>
+          <span className="reset-text">Reset Demo</span>
+        </button>
+        
+        <div className="user-avatar">
+          {user.avatarInitials}
+        </div>
+        <span className="user-name">{user.name}</span>
+        <button onClick={onLogout} className="logout-btn">
+          <i className="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default NavBar;
