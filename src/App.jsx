@@ -16,7 +16,7 @@ const DEMO_GROUPS = [
   {
     id: 'group1',
     name: '🚀 AI Research Project',
-    joinCode: 'AI2024',
+    joinCode: 'AI2026',
     createdBy: 'Dr. Smith',
     createdAt: '2026-01-15T10:00:00Z',
     members: [
